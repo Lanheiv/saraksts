@@ -1,4 +1,4 @@
-<?php
+<?php // Var izmantot swich un explode funkciju lai atrastu konkrēto vārdu
 require "Database.php";
 $config = require("config.php");
 
@@ -45,6 +45,6 @@ $letter = $db->query("SELECT * FROM letters")->fetchAll(PDO::FETCH_ASSOC);
             }
         ?>
     </div>
-    <script src="snow.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

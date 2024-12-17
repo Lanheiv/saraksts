@@ -1,77 +1,81 @@
 body {
-    font-family: sans-serif;
-    background-color: #47663B;
-    margin: 0;
-    padding: 0;
+  font-family: sans-serif;
+  background-color: #47663b;
+  margin: 0;
+  padding: 0;
 }
 header {
-    background-color: #1F4529;
-    color: #E8ECD7;
-    padding: 100px 0; 
-    text-align: center;
-    position: relative;
-    z-index: 1;
+  background-color: #1f4529;
+  color: #e8ecd7;
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 .list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 10px;
-    justify-items: center;
-    align-items: center; 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 10px 300px 10px 300px;
+  justify-items: center;
+  align-items: center;
 }
 .box {
-    background-color: #1F4529;
-    color: #E8ECD7;
-    width: 90%;
-    padding: 20px;
-    text-align: center; 
-    justify-content: center; 
-    align-items: center;
-    border-radius: 8px;
+  background-color: #1f4529;
+  color: #e8ecd7;
+  width: 90%;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
 }
 
 .accordion {
-    background-color: #47663B;
-    color: #E8ECD7;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
-    border-radius: 8px;
+  background-color: #47663b;
+  color: #e8ecd7;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+  border-radius: 8px;
 }
-.active, .accordion:hover {
-    background-color: #38572c; 
+.active,
+.accordion:hover {
+  background-color: #38572c;
 }
 .active {
-    transition: 0s;
-    border-radius: 8px 8px 0px 0px;
+  transition: 0s;
+  border-radius: 8px 8px 0px 0px;
 }
 .panel {
-    border-radius: 0px 0px 8px 8px;
-    padding: 0 18px;
-    display: none;
-    background-color: #47663B;
-    overflow: hidden;
+  border-radius: 0px 0px 8px 8px;
+  padding: 0 18px;
+  display: none;
+  background-color: #47663b;
+  overflow: hidden;
 }
 
-@media (max-width: 600px) {
-    .list {
-        grid-template-columns: repeat(1, 1fr);
-    }
+@media (max-width: 800px) {
+  .list {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 10px;
+  }
 }
 
-@media (min-width: 600px) and (max-width: 1024px) {
-    .list {
-        grid-template-columns: repeat(2, 1fr);
-    }
+@media (min-width: 800px) and (max-width: 1200px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px 100px 10px 100px;
+  }
 }
-@media (min-width: 1024px) and (max-width: 1824px) {
-    .list {
-        grid-template-columns: repeat(3, 1fr);
-    }
+@media (min-width: 1200px) and (max-width: 1700px) {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px 200px 10px 200px;
+  }
 }
