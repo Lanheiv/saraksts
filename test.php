@@ -1,17 +1,49 @@
 <?php
+require "Database.php";
 
-function highlightWords($text, $words) {
-    $escapedWords = array_map('preg_quote', $words);
-    $pattern = '/\b(' . implode('|', $escapedWords) . ')\b/i';
-    
-    $highlightedText = preg_replace($pattern, '<mark>$1</mark>', $text);
+$db = new DATABASE($config["database"]);
 
-    return $highlightedText;
+$child = $db->query("SELECT * FROM children")->fetchAll(PDO::FETCH_ASSOC);
+$gift = $db->query("SELECT `name` FROM gifts")->fetchAll(PDO::FETCH_ASSOC);
+
+$text = "";
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $text = $row['content'];
+    }
 }
 
-// Example usage
-$text = "This is a simple test. The test is important, and the quick brown fox jumps over the lazy dog.";
-$words = ["test", "quick", "dog"];
-$highlightedText = highlightWords($text, $words);
+$highlighted_text = $text;
 
-echo $highlightedText;
+if ($words_result->num_rows > 0) {
+    while ($row = $words_result->fetch_assoc()) {
+        $word = $row['word'];
+
+        $highlighted_text = preg_replace('/\b' . preg_quote($word, '/') . '\b/i', '<span style="background-color: yellow;">' . $word . '</span>', $highlighted_text);
+    }
+}
+
+foreach ($letter as $snad) {
+    if ($snad['sender_id'] == $kid['id']) { // Iegūst īsto vēstuli
+        $words = explode(" ", $snad['letter_text']); // sadala tekstu
+
+        $matchedGifts = [];
+
+        foreach ($words as $word) {
+            foreach ($gifts as $gift) {
+                if (stripos($word, $gift['name']) !== false) {
+                    $matchedGifts[] = $gift['name'];
+                    break;
+                }
+            }
+        }
+
+        echo "<p>" . $snad['letter_text'] . "</p>";
+
+        if (!empty($matchedGifts)) { // Pārbaude vai ir kautkas
+            echo "<p><strong>Sīkais grib: </strong>" . implode(", ", array_unique($matchedGifts)) . "</p>";
+        }
+        break;
+    }
+}

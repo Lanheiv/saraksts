@@ -1,12 +1,13 @@
-<?php // Var izmantot swich un explode funkciju lai atrastu konkrēto vārdu
+<?php 
 require "Database.php";
 $config = require("config.php");
 
 $db = new DATABASE($config["database"]);
-$child = $db->query("SELECT * FROM children")->fetchAll(PDO::FETCH_ASSOC);
 
-$db2 = new DATABASE($config["database"]);
+$child = $db->query("SELECT * FROM children")->fetchAll(PDO::FETCH_ASSOC);
 $letter = $db->query("SELECT * FROM letters")->fetchAll(PDO::FETCH_ASSOC);
+$gifts = $db->query("SELECT * FROM gifts")->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="lv">
@@ -35,8 +36,16 @@ $letter = $db->query("SELECT * FROM letters")->fetchAll(PDO::FETCH_ASSOC);
                 echo "<div class='panel'>";
             
                 foreach ($letter as $snad) {
-                    if ($snad['id'] == $kid['id']) {
-                        echo "<p>" . $snad['letter_text'] . "</p>";
+                    if ($snad['sender_id'] == $kid['id']) {
+                        $letterText = $snad['letter_text'];
+
+                        foreach ($gifts as $gift) {
+                            $giftName = $gift['name'];
+                            $letterText = preg_replace('/\b(' . preg_quote($giftName, '/') . ')\b/i', '<span class="highlight">$1</span>', $letterText);
+                        }
+
+                        echo "<p>" . $letterText . "</p>";
+
                         break;
                     }
                 }

@@ -20,6 +20,10 @@ header {
   justify-items: center;
   align-items: center;
 }
+.highlight {
+  color: #dd2626; 
+  font-weight: bold; 
+}
 .box {
   background-color: #1f4529;
   color: #e8ecd7;
