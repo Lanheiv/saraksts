@@ -39,12 +39,20 @@ $gifts = $db->query("SELECT * FROM gifts")->fetchAll(PDO::FETCH_ASSOC);
                     if ($snad['sender_id'] == $kid['id']) {
                         $letterText = $snad['letter_text'];
 
+                        $matchedGifts = [];
+
                         foreach ($gifts as $gift) {
                             $giftName = $gift['name'];
                             $letterText = preg_replace('/\b(' . preg_quote($giftName, '/') . ')\b/i', '<span class="highlight">$1</span>', $letterText);
+                            if (stripos($letterText, $gift['name']) !== false) {
+                                $matchedGifts[] = $gift['name'];
+                            }
                         }
 
                         echo "<p>" . $letterText . "</p>";
+                        if (!empty($matchedGifts)) { // Pārbaude vai ir kautkas
+                            echo "<p>Sīkais grib: " . implode(", ", array_unique($matchedGifts)) . "</p>";
+                        }
 
                         break;
                     }
